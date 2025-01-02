@@ -7,6 +7,14 @@ const downButton = document.getElementById('downButton');
 const leftButton = document.getElementById('leftButton');
 const rightButton = document.getElementById('rightButton');
 
+// Einstellungen
+const settingsButton = document.getElementById('settingsButton');
+const settingsPopup = document.getElementById('settingsPopup');
+const settingsCloseButton = document.getElementById('settingsCloseButton');
+const snakeColorPicker = document.getElementById('snakeColorPicker');
+const foodColorPicker = document.getElementById('foodColorPicker');
+const backgroundColorPicker = document.getElementById('backgroundColorPicker');
+
 const scoreDisplay = document.getElementById('scoreDisplay');
 
 let snake = [{ x: 300, y: 300 }];
@@ -17,12 +25,12 @@ let score = 0;
 let changingDirection = false;
 
 function clearCanvas() {
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = backgroundColorPicker.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawSnakePart(snakePart) {
-    ctx.fillStyle = '#ff0000';
+    ctx.fillStyle = snakeColorPicker.value;
     ctx.fillRect(snakePart.x, snakePart.y, 20, 20);
 }
 
@@ -64,17 +72,11 @@ function getRandomFoodPosition() {
 }
 
 function drawFood() {
-    ctx.fillStyle = '#00ff00';
+    ctx.fillStyle = foodColorPicker.value;
     ctx.fillRect(food.x, food.y, 20, 20);
 }
 
 function main() {
-    if (checkGameOver()) {
-        alert('Game Over!');
-        document.location.reload();
-        return;
-    }
-
     changingDirection = false;
     setTimeout(() => {
         clearCanvas();
@@ -83,13 +85,6 @@ function main() {
         drawSnake();
         main();
     }, 100);
-}
-
-function checkGameOver() {
-    for (let i = 4; i < snake.length; i++) {
-        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
-    }
-    return false; // Kein Game Over durch Ränder
 }
 
 // Steuerung mit Pfeiltasten
@@ -161,6 +156,15 @@ rightButton.addEventListener('click', () => {
         dy = 0;
         changingDirection = true;
     }
+});
+
+// Einstellungen öffnen/schließen
+settingsButton.addEventListener('click', () => {
+    settingsPopup.style.display = 'block';
+});
+
+settingsCloseButton.addEventListener('click', () => {
+    settingsPopup.style.display = 'none';
 });
 
 main();

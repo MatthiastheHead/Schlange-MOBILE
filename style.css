@@ -56,3 +56,49 @@ h1 {
 #controlPad button:active {
     background-color: #ff5555;
 }
+
+#settingsButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#settingsButton:active {
+    background-color: #0056b3;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.popup h2 {
+    text-align: center;
+}
+
+.popup button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup button:active {
+    background-color: #0056b3;
+}
