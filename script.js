@@ -1,12 +1,18 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+// Steuerkreuz-Buttons
+const upButton = document.getElementById('upButton');
+const downButton = document.getElementById('downButton');
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+
 let snake = [{ x: 300, y: 300 }];
 let dx = 20; // Bewegung auf der x-Achse
 let dy = 0;  // Bewegung auf der y-Achse
 let food = getRandomFoodPosition();
 let score = 0;
-let changingDirection = false; // Verhindert schnelle Richtungswechsel
+let changingDirection = false;
 
 function clearCanvas() {
     ctx.fillStyle = '#000000';
@@ -26,12 +32,11 @@ function advanceSnake() {
     const head = { x: snake[0].x + dx, y: snake[0].y + dy };
     snake.unshift(head);
 
-    // Überprüfen, ob die Schlange das Essen erreicht hat
     if (head.x === food.x && head.y === food.y) {
         score += 10;
         food = getRandomFoodPosition();
     } else {
-        snake.pop(); // Entfernt das letzte Segment, um Bewegung zu simulieren
+        snake.pop();
     }
 }
 
@@ -52,7 +57,7 @@ function main() {
         return;
     }
 
-    changingDirection = false; // Ermöglicht neue Richtungsänderung
+    changingDirection = false;
     setTimeout(() => {
         clearCanvas();
         drawFood();
@@ -75,29 +80,11 @@ function checkGameOver() {
     return hitWallLeft || hitWallRight || hitWallTop || hitWallBottom;
 }
 
+// Event-Listener für Pfeiltasten
 document.addEventListener('keydown', (event) => {
-    if (changingDirection) return; // Verhindert schnelle Richtungsänderungen
+    if (changingDirection) return;
     changingDirection = true;
 
     const keyPressed = event.key;
     const goingUp = dy === -20;
-    const goingDown = dy === 20;
-    const goingRight = dx === 20;
-    const goingLeft = dx === -20;
-
-    if (keyPressed === 'ArrowUp' && !goingDown) {
-        dx = 0;
-        dy = -20;
-    } else if (keyPressed === 'ArrowDown' && !goingUp) {
-        dx = 0;
-        dy = 20;
-    } else if (keyPressed === 'ArrowLeft' && !goingRight) {
-        dx = -20;
-        dy = 0;
-    } else if (keyPressed === 'ArrowRight' && !goingLeft) {
-        dx = 20;
-        dy = 0;
-    }
-});
-
-main();
+   
