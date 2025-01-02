@@ -11,6 +11,15 @@ body {
     overflow: hidden;
 }
 
+h1 {
+    margin-bottom: 10px;
+}
+
+#scoreDisplay {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
 #gameCanvas {
     border: 2px solid #ffffff;
     background-color: #000000;
